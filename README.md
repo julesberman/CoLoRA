@@ -23,5 +23,18 @@ Then you should be able to run the included notebooks:
 - burgers.ipynb
 
 
-![Alt Text](./img/vlasov.gif)
-![Alt Text](./img/burgers.gif)
+
+## Reduced models discovered via CoLoRA
+<img src="./img/vlasov.gif" width="500" height="350" />
+<img src="./img/vlasov_dynamics.gif" width="500" height="350" />
+
+
+
+<img src="./img/burgers.gif" width="500" height="350" />
+<img src="./img/burgers_dynamics.gif" width="500" height="350" />
+
+## CoLoRA vs LoRA
+![Manifold Cartoon](./img/colora_mani.png)
+
+## CoLoRA architecture
+![Architecture Cartoon](./img/colora_arch.png)
