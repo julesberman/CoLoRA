@@ -25,8 +25,8 @@ Then you should be able to run the included notebooks:
 
 
 ## Reduced models discovered via CoLoRA
-<img src="./img/vlasov.gif" width="400" height="300" />
-<img src="./img/vlasov_dynamics.gif" width="400" height="300" />
+<img src="./img/vlasov.gif" width="200" height="300" />
+<img src="./img/vlasov_dynamics.gif" width="200" height="300" />
 
 
 
