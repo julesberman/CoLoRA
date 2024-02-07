@@ -25,14 +25,19 @@ Then you should be able to run the included notebooks:
 
 
 ## Reduced models discovered via CoLoRA
+
+## Collisionless charged particles in electric field (Vlasov's Equation)
 <span>
-<img src="./img/vlasov.gif" width="400" height="350" />
-<img src="./img/vlasov_dynamics.gif" width="400" height="350" />
+<img src="./img/vlasov.gif" width="400" height="320" />
+<img src="./img/vlasov_dynamics.gif" width="400" height="320" />
 </span>
 
+<br>
+
+## Burgers’ equation in 2D
 <span>
-<img src="./img/burgers.gif" width="400" height="350" />
-<img src="./img/burgers_dynamics.gif" width="400" height="350" />
+<img src="./img/burgers.gif" width="400" height="320" />
+<img src="./img/burgers_dynamics.gif" width="400" height="320" />
 </span>
 
 ## CoLoRA vs LoRA
