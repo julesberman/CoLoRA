@@ -26,13 +26,13 @@ Then you should be able to run the included notebooks:
 
 ## Reduced models discovered via CoLoRA
 <span>
-<img src="./img/vlasov.gif" width="440" height="350" />
-<img src="./img/vlasov_dynamics.gif" width="440" height="350" />
+<img src="./img/vlasov.gif" width="400" height="350" />
+<img src="./img/vlasov_dynamics.gif" width="400" height="350" />
 </span>
 
 <span>
-<img src="./img/burgers.gif" width="440" height="350" />
-<img src="./img/burgers_dynamics.gif" width="440" height="350" />
+<img src="./img/burgers.gif" width="400" height="350" />
+<img src="./img/burgers_dynamics.gif" width="400" height="350" />
 </span>
 
 ## CoLoRA vs LoRA
