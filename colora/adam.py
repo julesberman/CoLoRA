@@ -16,7 +16,7 @@ str_to_opt = {
 }
 
 
-def adam_opt(theta_init, loss_fn, args=(), init_state=None, steps=1000, learning_rate=1e-3, scheduler=True, verbose=False, loss_tol=None, optimizer='adam'):
+def adam_opt(theta_init, loss_fn, args_fn, init_state=None, steps=1000, learning_rate=1e-3, scheduler=True, verbose=False, loss_tol=None, optimizer='adam'):
     # adds warm up cosine decay
     if scheduler:
         learning_rate = optax.cosine_decay_schedule(
@@ -40,7 +40,7 @@ def adam_opt(theta_init, loss_fn, args=(), init_state=None, steps=1000, learning
         params = optax.apply_updates(params, updates)
         return loss_value, params, state
 
-    params, opt_params = theta_init, theta_init
+    params = theta_init
     pbar = tqdm(range(steps), disable=not verbose)
     opt_loss = float('inf')
     loss_history = []
@@ -48,13 +48,14 @@ def adam_opt(theta_init, loss_fn, args=(), init_state=None, steps=1000, learning
 
     for i in pbar:
 
+        if callable(args_fn):
+            args = args_fn()
+        else:
+            args = args_fn
+
         cur_loss, params_new, state_new = step(params, state, args)
 
         pbar.set_postfix({'loss': f'{cur_loss:.3E}'})
-
-        if cur_loss < opt_loss:
-            opt_loss = cur_loss
-            opt_params = params_new
 
         if i % n_rec:
             loss_history.append(cur_loss)
@@ -66,4 +67,4 @@ def adam_opt(theta_init, loss_fn, args=(), init_state=None, steps=1000, learning
             break
 
     loss_history = np.asarray(loss_history)
-    return opt_params, loss_history
+    return params, loss_history

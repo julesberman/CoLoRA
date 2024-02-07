@@ -17,6 +17,9 @@ def init_net(net, input_dim, key=None):
 
 def split(theta_phi, filter_list):
 
+    if not isinstance(filter_list, list):
+        filter_list = [filter_list]
+
     def filter_rn(m, leaf_key, p):
         return leaf_key in filter_list
 

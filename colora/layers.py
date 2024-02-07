@@ -1,5 +1,5 @@
 
-from typing import Callable
+from typing import Callable, Optional
 
 import flax.linen as nn
 import jax.numpy as jnp
@@ -9,7 +9,7 @@ from flax.linen import initializers
 class Periodic(nn.Module):
 
     width: int
-    period: jnp.ndarray
+    period: Optional[jnp.ndarray]
     param_dtype = jnp.float32
     with_bias: bool = True
     w_init: Callable = initializers.lecun_normal()
@@ -64,7 +64,7 @@ class CoLoRA(nn.Module):
         alpha = self.param('alpha', z_init, (n_alpha,), self.param_dtype)
 
         AB = (A*alpha)@B
-        AB = AB / r
+        AB = AB  # / r
         W = (W + AB)
 
         out = X@W

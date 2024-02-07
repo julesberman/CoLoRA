@@ -1,5 +1,5 @@
 from collections.abc import Iterable
-from typing import Callable, List
+from typing import Callable, List, Optional
 
 import flax.linen as nn
 import jax
@@ -13,9 +13,9 @@ class DNN(nn.Module):
     layers: List[str]
     out_dim: int
     activation: Callable = jax.nn.swish
-    period: float = None
+    period: Optional[jnp.ndarray] = None
     rank: int = 1
-    full: int = False
+    full: bool = False
 
     @nn.compact
     def __call__(self, x):
