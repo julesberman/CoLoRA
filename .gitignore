@@ -11,7 +11,7 @@ ground_truth
 .ipynb_checkpoints
 .zshrc
 run.*
-data    
+
 ###################
 # PYTHON DEFAULTS #
 ###################

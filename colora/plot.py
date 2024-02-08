@@ -10,7 +10,7 @@ from matplotlib.animation import FuncAnimation
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
-def imshow_movie(sol, frames=50, t=None, interval=80, tight=False, title='', cmap='viridis', aspect='equal', live_cbar=False, save_to=None, show=True):
+def imshow_movie(sol, frames=50, t=None, interval=100, tight=False, title='', cmap='viridis', aspect='equal', live_cbar=False, save_to=None, show=True):
 
     fig, ax = plt.subplots()
     div = make_axes_locatable(ax)
@@ -56,7 +56,7 @@ def imshow_movie(sol, frames=50, t=None, interval=80, tight=False, title='', cma
         return HTML(ani.to_jshtml())
 
 
-def plotline_movie(sol, frames=50, t=None, X=None, interval=80, ylim=None):
+def line_movie(sol, frames=50, t=None, x=None,  title='', interval=100, ylim=None, save_to=None, show=True, legend=None, tight=False):
     sol = np.asarray(sol)
     if len(sol.shape) == 2:
         sol = np.expand_dims(sol, axis=0)
@@ -67,19 +67,28 @@ def plotline_movie(sol, frames=50, t=None, X=None, interval=80, ylim=None):
     ax.set_ylim([sol.min(), sol.max()])
     if ylim is not None:
         ax.set_ylim(ylim)
-    if X is None:
-        X = np.arange(sol.shape[1])
-    line = ax.plot(X, sol[0])
+    if x is None:
+        x = np.arange(sol.shape[1])
+
+    cycler = plt.cycler(
+        linestyle=['-', '--']*5, color=plt.rcParams['axes.prop_cycle'].by_key()['color'])
+    ax.set_prop_cycle(cycler)
+    line = ax.plot(x, sol[0], )
+    if tight:
+        plt.tight_layout()
+
+    if legend is not None:
+        ax.legend(legend)
 
     def animate(frame):
         sol, t = frame
-        ax.set_title(f't={t:.3f}')
+        ax.set_title(f'{title} t={t:.3f}')
         for i, l in enumerate(line):
             l.set_ydata(sol[:, i])
         return line
 
     def init():
-        line.set_ydata(np.ma.array(X, mask=True))
+        line.set_ydata(np.ma.array(x, mask=True))
         return line,
 
     if t is None:
@@ -92,11 +101,16 @@ def plotline_movie(sol, frames=50, t=None, X=None, interval=80, ylim=None):
     ani = FuncAnimation(fig, animate, frames=frames,
                         interval=interval, blit=True)
     plt.close()
-    # return ani
-    return HTML(ani.to_jshtml())
+    if save_to is not None:
+        p = Path(save_to).with_suffix('.gif')
+        ani.save(p, writer='pillow', fps=30)
+
+    if show:
+        return HTML(ani.to_jshtml())
 
 
-def trajectory_movie(y, frames=50, title='', ylabel='', xlabel='Time', legend=[], x=None, interval=80, ylim=None, save_to=None):
+def trajectory_movie(y, frames=50, title='', ylabel='', xlabel='Time', legend=[], x=None, interval=100, ylim=None, save_to=None):
+
     y = np.asarray(y)
     if x is None:
         x = np.arange(len(y))
