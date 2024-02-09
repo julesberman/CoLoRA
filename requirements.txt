@@ -3,9 +3,9 @@ einops==0.7.0
 flax==0.7.5
 h5py==3.9.0
 ipython==8.15.0
-jax==0.4.19
 matplotlib==3.7.3
 numpy==1.24.4
 optax==0.1.9
 setuptools==65.5.0
 tqdm==4.66.1
+jax==0.4.19

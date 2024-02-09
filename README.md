@@ -20,14 +20,19 @@ First locally install the colora package with
 pip install --editable .
 ```
 
-
 Install all additional required packages run:
 
 ```bash
  pip install -r requirements.txt
 ```
 
-Be sure that you install jax with the appropriate CPU or GPU support: [here](https://github.com/google/jax#installation)
+Lastly ensure that jax is installed with the appropriate CPU or GPU support depending on where you plan to run this code. Info on installing with GPU suport can be found: [here](https://github.com/google/jax#installation)
+
+NOTE make sure that if you install jax with GPU and cuda support that you still fix the versions of jax and jaxlib at the following:
+```
+jax==0.4.19
+jaxlib==0.4.19
+```
 
 Then you should be able to run the included notebooks:
 
