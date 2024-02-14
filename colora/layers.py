@@ -32,6 +32,24 @@ class Periodic(nn.Module):
         o = jnp.mean(o, axis=1)
 
         return o
+    
+class Random_Freq(nn.Module):
+
+    features: int
+    param_dtype = jnp.float32
+    variance: int = None
+
+    @nn.compact
+    def __call__(self, x):
+        f, dim = self.features, x.shape[-1]
+        a_init = initializers.normal(stddev=self.variance)
+
+        R = self.param('R', a_init, (f, dim), self.param_dtype)
+        fs = f//2
+
+        s = jnp.sin(R[:fs] @ x)
+        c = jnp.cos(R[fs:] @ x)
+        return jnp.concatenate([s, c])
 
 
 class CoLoRA(nn.Module):

@@ -9,7 +9,10 @@ import jax.numpy as jnp
 def init_net(net, input_dim, key=None):
     if key is None:
         key = jax.random.PRNGKey(random.randint(0, 10_000))
-    pt = jnp.zeros(input_dim)
+    if type(input_dim) is int:
+        pt = jnp.zeros(input_dim)
+    else:
+        pt = input_dim
     theta_init = net.init(key, pt)
     f = net.apply
     return theta_init, f
